@@ -21,3 +21,15 @@ services:
       environment:
           # 環境変数でNew Relicのライセンスキーを設定
           - NEW_RELIC_LICENSE_KEY
+  # OpenTelemetry Collector
+  otel-collector:
+    container_name: otel-collector
+    platform: 'linux/amd64'
+    image: otel/opentelemetry-collector:0.83.0
+    restart: always
+    command: ["--config=/etc/otel-config.yml", ""]
+    volumes:
+      - ./otel-config.yml:/etc/otel-config.yml
+    environment:
+        # 環境変数でNew Relicのライセンスキーを設定
+        - NEW_RELIC_LICENSE_KEY
